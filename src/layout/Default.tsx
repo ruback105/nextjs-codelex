@@ -32,7 +32,7 @@ const DefaultLayout: FC<Props> = ({ children }) => {
     <div className="p-[30px] bg-[#E5E5E5] h-screen flex flex-col">
       <header className="flex justify-between items-center pb-8">
         <h1 className="whitespace-nowrap font-bold text-xl ml-4">Quiz Time</h1>
-        <div className="ml-[115px] p-[18px] flex space-x-[15px] bg-white border-2 shadow-sm rounded-full overflow-hidden min-w-[250px]">
+        <div className="p-[18px] flex space-x-[15px] bg-white border-2 shadow-sm rounded-full overflow-hidden min-w-[250px]">
           <Image
             src="/search.svg"
             width={20}
@@ -41,19 +41,17 @@ const DefaultLayout: FC<Props> = ({ children }) => {
           />
           <input type="text" defaultValue="Search.." />
         </div>
-        <div className="pl-[120px] flex items-center">
-          <Button primary>Start Quiz</Button>
+        <Button primary>Start Quiz</Button>
 
-          <div className="pl-[134px] flex space-x-[15px] items-center">
-            <Image
-              src="/Profile.png"
-              width={70}
-              height={70}
-              unoptimized
-              className="text-black"
-            />
-            <p className="truncate">Lorem, ipsum.</p>
-          </div>
+        <div className="flex space-x-[15px] items-center">
+          <Image
+            src="/Profile.png"
+            width={70}
+            height={70}
+            unoptimized
+            className="text-black"
+          />
+          <p className="truncate">Lorem, ipsum.</p>
         </div>
       </header>
       <div className="flex h-full w-full">
@@ -73,10 +71,10 @@ const DefaultLayout: FC<Props> = ({ children }) => {
             ))}
           </div>
 
-          <div className="flex space-x-[35px] mt-auto justify-center w-full ">
+          <button className="flex space-x-[35px] mt-auto justify-center items-center w-full">
             <Image src="/exit.svg" width={20} height={20} />
             <p className="text-[#696F79] text-lg">Log Out</p>
-          </div>
+          </button>
         </div>
 
         <div className="w-full ml-[30px] p-[33px] pt-[50px] shadow-inner rounded-[30px] bg-white">
