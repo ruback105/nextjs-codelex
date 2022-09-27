@@ -1,12 +1,14 @@
 import "../../styles/globals.css";
 
-import { DefaultLayout } from "@/layout";
+import { DefaultLayout, Empty } from "@/layout";
 import { Layout } from "@/types/generic";
 
 const getLayout = (layout: Layout) => {
   switch (layout) {
-    default:
+    case "default":
       return DefaultLayout;
+    default:
+      return Empty;
   }
 };
 
