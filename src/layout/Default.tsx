@@ -58,7 +58,7 @@ const DefaultLayout: FC<Props> = ({ children }) => {
         <div className="flex flex-col w-[330px] h-full">
           <div className="space-y-[15px] flex flex-col">
             {routes.map((route) => (
-              <Link href={route.href}>
+              <Link href={route.href} key={route.title}>
                 <a
                   className={classNames(
                     className(router.route === route.href, true),
