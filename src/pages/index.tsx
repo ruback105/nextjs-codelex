@@ -1,7 +1,21 @@
 import { NextCustomPage } from "@/types/generic";
 
-const Dashboard: NextCustomPage = () => {
-  return <div className="w-full h-full bg-red-700 rounded-[30px]"></div>;
+export type Props = {};
+
+const Dashboard: NextCustomPage<Props> = () => {
+  return <div className="grid grid-cols-3 md:grid-cols-5"></div>;
+};
+
+export const getServerSideProps = async () => {
+  const { categories } = await fetch("http://localhost:3000/api/category").then(
+    (res) => res.json()
+  );
+
+  return {
+    props: {
+      categories,
+    },
+  };
 };
 
 Dashboard.layout = "default";

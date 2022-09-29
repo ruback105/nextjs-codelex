@@ -1,10 +1,17 @@
 import { Button } from "@/components";
-import { className } from "@/components/Button";
+import { buttonClassName } from "@/components/Button";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { FC, ReactNode } from "react";
+import {
+  UserIcon,
+  ArrowLeftIcon,
+  AcademicCapIcon,
+  QuestionMarkCircleIcon,
+  AdjustmentsIcon,
+} from "@heroicons/react/solid";
+import { useRouter } from "next/router";
 
 type Props = {
   children: ReactNode;
@@ -17,14 +24,17 @@ const DefaultLayout: FC<Props> = ({ children }) => {
     {
       title: "Dashboard",
       href: "/",
+      icon: <AcademicCapIcon width={20} height={20} />,
     },
     {
       title: "Support",
       href: "/support",
+      icon: <QuestionMarkCircleIcon width={20} height={20} />,
     },
     {
       title: "Notification",
       href: "/notification",
+      icon: <AdjustmentsIcon width={20} height={20} />,
     },
   ];
 
@@ -44,35 +54,37 @@ const DefaultLayout: FC<Props> = ({ children }) => {
         <Button primary>Start Quiz</Button>
 
         <div className="flex space-x-[15px] items-center">
-          <Image
-            src="/Profile.png"
-            width={70}
-            height={70}
-            unoptimized
-            className="text-black"
-          />
+          <UserIcon />
           <p className="truncate">Lorem, ipsum.</p>
         </div>
       </header>
       <div className="flex h-full w-full">
         <div className="flex flex-col w-[330px] h-full">
           <div className="space-y-[15px] flex flex-col">
-            {routes.map((route) => (
-              <Link href={route.href}>
-                <a
-                  className={classNames(
-                    className(router.route === route.href, true),
-                    "text-center"
-                  )}
-                >
-                  {route.title}
-                </a>
-              </Link>
-            ))}
+            {routes.map(({ href, title, icon }) => {
+              const activeRoute = router.route === href;
+
+              return (
+                <Link href={href} key={title}>
+                  <a
+                    className={classNames(
+                      buttonClassName(activeRoute, true),
+                      "gap-x-3 items-center flex justify-center",
+                      {
+                        "text-white": activeRoute,
+                      }
+                    )}
+                  >
+                    {icon}
+                    {title}
+                  </a>
+                </Link>
+              );
+            })}
           </div>
 
           <button className="flex space-x-[35px] mt-auto justify-center items-center w-full">
-            <Image src="/exit.svg" width={20} height={20} />
+            <ArrowLeftIcon width={20} height={20} />
             <p className="text-[#696F79] text-lg">Log Out</p>
           </button>
         </div>
