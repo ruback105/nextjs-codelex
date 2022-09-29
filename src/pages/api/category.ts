@@ -24,7 +24,10 @@ export default async function handler(
     case "POST":
       try {
         const { title, key } = req.body;
-        const category = await Category.create({ title });
+        const category = await Category.create({
+          title,
+          key: key.toLocaleLowerCase().trim(),
+        });
 
         res
           .status(201)

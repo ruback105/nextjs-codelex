@@ -3,7 +3,7 @@ import { Schema, models, model, Model } from "mongoose";
 export type CategoryProps = {
   _id?: string;
   title: string;
-  key: Lowercase<string>;
+  key: string;
 };
 
 const CategorySchema = new Schema<CategoryProps>({
