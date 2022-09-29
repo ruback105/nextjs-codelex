@@ -1,7 +1,7 @@
 import { Schema, models, model, Model } from "mongoose";
 
 export type CategoryProps = {
-  _id: string;
+  _id?: string;
   title: string;
   key: Lowercase<string>;
 };
