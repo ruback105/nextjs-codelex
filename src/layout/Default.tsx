@@ -1,7 +1,6 @@
 import { Button } from "@/components";
 import { buttonClassName } from "@/components/Button";
 import classNames from "classnames";
-import Image from "next/image";
 import Link from "next/link";
 import { FC, ReactNode } from "react";
 import {
@@ -10,6 +9,7 @@ import {
   AcademicCapIcon,
   QuestionMarkCircleIcon,
   AdjustmentsIcon,
+  SearchIcon,
 } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 
@@ -38,25 +38,28 @@ const DefaultLayout: FC<Props> = ({ children }) => {
     },
   ];
 
+  function logout() {
+    return null;
+  }
+
   return (
     <div className="p-[30px] bg-[#E5E5E5] h-screen flex flex-col">
       <header className="flex justify-between items-center pb-8">
         <h1 className="whitespace-nowrap font-bold text-xl ml-4">Quiz Time</h1>
         <div className="p-[18px] flex space-x-[15px] bg-white border-2 shadow-sm rounded-full overflow-hidden min-w-[250px]">
-          <Image
-            src="/search.svg"
-            width={20}
-            height={20}
-            className="text-black"
-          />
+          <SearchIcon />
           <input type="text" defaultValue="Search.." />
         </div>
         <Button primary>Start Quiz</Button>
 
-        <div className="flex space-x-[15px] items-center">
+        <button
+          type="button"
+          onClick={logout}
+          className="flex space-x-[15px] items-center"
+        >
           <UserIcon />
           <p className="truncate">Lorem, ipsum.</p>
-        </div>
+        </button>
       </header>
       <div className="flex h-full w-full">
         <div className="flex flex-col w-[330px] h-full">
@@ -89,7 +92,7 @@ const DefaultLayout: FC<Props> = ({ children }) => {
           </button>
         </div>
 
-        <div className="w-full ml-[30px] p-[33px] pt-[50px] shadow-inner rounded-[30px] bg-white">
+        <div className="w-full ml-[30px] p-[33px] pt-[50px] shadow-inner rounded-[30px] bg-white overflow-hidden">
           {children}
         </div>
       </div>

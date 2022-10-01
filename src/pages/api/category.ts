@@ -8,14 +8,16 @@ export default async function handler(
   req: NextCustomApiRequest<CategoryProps>,
   res: NextApiResponse
 ) {
-  const { method } = req;
+  const { method, query } = req;
 
   await dbConnect();
 
   switch (method) {
     case "GET":
       try {
-        const categories = await Category.find({});
+        const categories = await Category.find({}).limit(
+          query.limit ? Number(query.limit) : 10
+        );
         res.status(200).json({ res: "ok", categories });
       } catch (e) {
         res.status(500).json({ message: "Inter server error" });
