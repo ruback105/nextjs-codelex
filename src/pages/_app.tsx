@@ -1,7 +1,8 @@
 import "../../styles/globals.css";
 
 import { DefaultLayout, Empty } from "@/layout";
-import { Layout } from "@/types/generic";
+import { Layout, NextCustomPage } from "@/types/generic";
+import { AppProps } from "next/app";
 
 const getLayout = (layout: Layout) => {
   switch (layout) {
@@ -12,8 +13,10 @@ const getLayout = (layout: Layout) => {
   }
 };
 
-function MyApp({ Component, pageProps }) {
-  const ComponentLayout = getLayout(Component.layout);
+function MyApp({ Component, pageProps }: AppProps) {
+  const { layout } = Component as NextCustomPage;
+  
+  const ComponentLayout = getLayout(layout);
 
   return (
     <ComponentLayout>

@@ -1,11 +1,9 @@
 import { Category } from "@/models";
 import dbConnect from "@/lib/dbConnect";
-import { NextApiResponse } from "next";
-import { CategoryProps } from "@/models/Category";
-import { NextCustomApiRequest } from "@/types/generic";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
-  req: NextCustomApiRequest<CategoryProps>,
+  req: NextApiRequest,
   res: NextApiResponse
 ) {
   const { method, query } = req;
@@ -16,7 +14,7 @@ export default async function handler(
     case "GET":
       try {
         const categories = await Category.find({}).limit(
-          query.limit ? Number(query.limit) : 10
+          query.limit ? Number(query.limit) : 12
         );
         res.status(200).json({ res: "ok", categories });
       } catch (e) {
@@ -25,7 +23,8 @@ export default async function handler(
       break;
     case "POST":
       try {
-        const { title, key } = req.body;
+        const { title, key } = JSON.parse(req.body);
+
         const category = await Category.create({
           title,
           key: key.toLocaleLowerCase().trim(),

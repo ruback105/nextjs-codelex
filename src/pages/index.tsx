@@ -1,8 +1,11 @@
 import { CategoryCard, ProgressIcon, ProgressSlider } from "@/components";
+import config from "@/config";
 import { CategoryProps } from "@/models/Category";
 import { NextCustomPage } from "@/types/generic";
 import { CheckCircleIcon, ClockIcon, FlagIcon } from "@heroicons/react/solid";
+import classNames from "classnames";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 export type Props = {
@@ -52,7 +55,7 @@ const Dashboard: NextCustomPage<Props> = ({ categories }) => {
 
         <div className="grid grid-cols-3 mt-4">
           {mockedProgress.map((progressIcon) => (
-            <ProgressIcon {...progressIcon} />
+            <ProgressIcon {...progressIcon} key={progressIcon.title} />
           ))}
         </div>
       </div>
@@ -75,7 +78,11 @@ const Dashboard: NextCustomPage<Props> = ({ categories }) => {
           <div className="rounded-[30px] overflow-hidden shadow-md p-4">
             <div className="grid grid-cols-2">
               {mockedAchievements.map((achievement) => (
-                <button type="button" className="flex flex-col items-center">
+                <button
+                  type="button"
+                  className="flex flex-col items-center"
+                  key={achievement}
+                >
                   <div className="w-[100px] h-[100px] bg-gray-300 rounded-md"></div>
                   <p>{achievement}</p>
                 </button>
@@ -99,13 +106,28 @@ const Dashboard: NextCustomPage<Props> = ({ categories }) => {
             </div>
           </div>
 
-          <div className="mt-2 rounded-[30px] overflow-hidden grid grid-cols-2 gap-5 h-full">
-            {categories.map(({ key, title }) => (
-              <CategoryCard
-                onClick={() => router.push(`/category/${key ?? ""}`)}
-                title={title}
-              />
-            ))}
+          <div
+            className={classNames(
+              "mt-2 rounded-[30px] overflow-hidden w-full h-full",
+              {
+                "grid grid-cols-2 gap-5": categories.length,
+                "flex items-center justify-center": !categories.length,
+              }
+            )}
+          >
+            {categories.length ? (
+              categories.map(({ key, title }) => (
+                <CategoryCard
+                  href={`/category/${key ?? ""}`}
+                  title={title}
+                  key={key}
+                />
+              ))
+            ) : (
+              <Link href="/category">
+                <a>Create new Category</a>
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -115,7 +137,7 @@ const Dashboard: NextCustomPage<Props> = ({ categories }) => {
 
 export const getServerSideProps = async () => {
   const { categories } = await fetch(
-    "http://localhost:3000/api/category?limit=4"
+    `${config.baseUrl}/api/category?limit=4`
   ).then((res) => res.json());
 
   return {

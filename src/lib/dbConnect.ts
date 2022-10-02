@@ -1,12 +1,13 @@
+import config from "@/config";
 import mongoose, { ConnectOptions } from "mongoose";
 
-if (!process.env.MONGODB_URI) {
+if (!config.mongoUri) {
   throw new Error(
     "Please define the MONGODB_URI environment variable inside .env.local"
   );
 }
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = config.mongoUri;
 
 /**
  * Global is used here to maintain a cached connection across hot reloads

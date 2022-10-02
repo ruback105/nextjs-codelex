@@ -1,16 +1,21 @@
+import Link from "next/link";
 import React from "react";
 
-export type ICategoryCardProps = { onClick: () => void; title: string };
+export type CategoryCardProps = {
+  title: string;
+  href: string;
+};
 
-const CategoryCard: React.FC<ICategoryCardProps> = ({ onClick, title }) => {
+const CategoryCard: React.FC<CategoryCardProps> = ({ title, href }) => {
   return (
-    <button
-      type="button"
-      className="bg-gray-300 rounded-[30px] flex items-end"
-      onClick={onClick}
-    >
-      <p className="p-4">{title}</p>
-    </button>
+    <Link href={href}>
+      <a
+        type="button"
+        className="bg-gray-300 rounded-[30px] flex items-end max-h-[160px]"
+      >
+        <p className="p-4">{title}</p>
+      </a>
+    </Link>
   );
 };
 

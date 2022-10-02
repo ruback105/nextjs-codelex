@@ -1,7 +1,7 @@
-import React, { ReactNode } from "react";
+import React, { ButtonHTMLAttributes, ReactNode } from "react";
 import classNames from "classnames";
 
-export type ButtonProps = {
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   icon?: ReactNode;
   children: ReactNode;
   primary?: boolean;
@@ -14,13 +14,20 @@ export const buttonClassName = (primary?: boolean, hover?: boolean) =>
     "hover:bg-[#8692A6] hover:text-white": hover,
   });
 
-const Button: React.FC<ButtonProps> = ({ icon, children, primary, hover }) => {
+const Button: React.FC<ButtonProps> = ({
+  icon,
+  children,
+  primary,
+  hover,
+  ...rest
+}) => {
   return (
     <button
       className={classNames(
         buttonClassName(primary, hover),
         "gap-x-3 items-center flex justify-center"
       )}
+      {...rest}
     >
       {icon}
       {children}
