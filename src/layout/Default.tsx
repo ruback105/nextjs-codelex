@@ -12,6 +12,7 @@ import {
   SearchIcon,
 } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
+import { signOut } from "next-auth/react";
 
 type Props = {
   children: ReactNode;
@@ -86,7 +87,10 @@ const DefaultLayout: FC<Props> = ({ children }) => {
             })}
           </div>
 
-          <button className="flex space-x-[35px] mt-auto justify-center items-center w-full">
+          <button
+            className="flex space-x-[35px] mt-auto justify-center items-center w-full"
+            onClick={() => signOut()}
+          >
             <ArrowLeftIcon width={20} height={20} />
             <p className="text-[#696F79] text-lg">Log Out</p>
           </button>
