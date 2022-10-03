@@ -3,6 +3,8 @@ import "../../styles/globals.css";
 import { DefaultLayout, Empty } from "@/layout";
 import { Layout, NextCustomPage } from "@/types/generic";
 import { AppProps } from "next/app";
+import { SessionProvider } from "next-auth/react";
+import { Session } from "next-auth";
 
 const getLayout = (layout: Layout) => {
   switch (layout) {
@@ -13,14 +15,21 @@ const getLayout = (layout: Layout) => {
   }
 };
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps<{
+  session: Session;
+}>) {
   const { layout } = Component as NextCustomPage;
-  
+
   const ComponentLayout = getLayout(layout);
 
   return (
     <ComponentLayout>
-      <Component {...pageProps} />
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
     </ComponentLayout>
   );
 }

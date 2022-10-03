@@ -12,6 +12,7 @@ import {
   SearchIcon,
 } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
+import { signOut, useSession } from "next-auth/react";
 
 type Props = {
   children: ReactNode;
@@ -38,10 +39,6 @@ const DefaultLayout: FC<Props> = ({ children }) => {
     },
   ];
 
-  function logout() {
-    return null;
-  }
-
   return (
     <div className="p-[30px] bg-[#E5E5E5] h-screen flex flex-col">
       <header className="flex justify-between items-center pb-8">
@@ -54,7 +51,7 @@ const DefaultLayout: FC<Props> = ({ children }) => {
 
         <button
           type="button"
-          onClick={logout}
+          onClick={() => signOut({ redirect: false })}
           className="flex space-x-[15px] items-center"
         >
           <UserIcon />
