@@ -1,12 +1,18 @@
 import { NextCustomPage } from "@/types/generic";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+
+type FormProps = {
+  email: string;
+  password: string;
+};
 
 const SignUp: NextCustomPage = () => {
-  type FormProps = {
-    email: string;
-    password: string;
-  };
+  const router = useRouter();
+  const { data: session } = useSession();
 
   const { register, handleSubmit } = useForm<FormProps>({
     defaultValues: {
@@ -14,6 +20,12 @@ const SignUp: NextCustomPage = () => {
       password: "",
     },
   });
+
+  useEffect(() => {
+    if (session?.user?.email) {
+      router.replace("/");
+    }
+  }, [session]);
 
   async function onSubmit(formData: FormProps) {
     await fetch("http://localhost:3000/api/user", {

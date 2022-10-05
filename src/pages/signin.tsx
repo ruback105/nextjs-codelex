@@ -12,14 +12,14 @@ type FormProps = {
 
 const SignIn: NextCustomPage = () => {
   const router = useRouter();
+  const { data: session } = useSession();
+
   const { register, handleSubmit } = useForm<FormProps>({
     defaultValues: {
       email: "test@email.com",
       password: "",
     },
   });
-
-  const { data: session } = useSession();
 
   useEffect(() => {
     if (session?.user?.email) {
@@ -93,13 +93,13 @@ const SignIn: NextCustomPage = () => {
                 <p className="text-center font-semibold mx-4 mb-0">OR</p>
               </div>
 
-              <a
+              <button
+                type="button"
                 className="px-7 py-3 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
                 style={{ backgroundColor: "#3b5998" }}
-                href="#!"
-                role="button"
-                data-mdb-ripple="true"
-                data-mdb-ripple-color="light"
+                onClick={() => {
+                  signIn("facebook", { callbackUrl: "/" });
+                }}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +112,7 @@ const SignIn: NextCustomPage = () => {
                   />
                 </svg>
                 Continue with Facebook
-              </a>
+              </button>
               <a
                 className="px-7 py-3 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center"
                 style={{ backgroundColor: "#55acee" }}

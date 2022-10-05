@@ -4,6 +4,7 @@ import { CategoryProps } from "@/models/Category";
 import { NextCustomPage } from "@/types/generic";
 import { CheckCircleIcon, ClockIcon, FlagIcon } from "@heroicons/react/solid";
 import classNames from "classnames";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -14,6 +15,7 @@ export type Props = {
 
 const Dashboard: NextCustomPage<Props> = ({ categories }) => {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const mockedProgress = [
     {
@@ -39,14 +41,16 @@ const Dashboard: NextCustomPage<Props> = ({ categories }) => {
     <div className="flex space-x-10">
       <div className="w-1/4 relative rounded-[30px] overflow-hidden">
         <Image
-          src="/profile.png"
+          src={session?.user?.image ? session?.user?.image : "/profile.png"}
           layout="fill"
           objectFit="cover"
           className="scale-150"
         />
       </div>
       <div className="w-3/4">
-        <h2 className="font-bold text-xl">Oluwatobi Olowu</h2>
+        <h2 className="font-bold text-xl">
+          {session?.user?.name || "No User Name"}
+        </h2>
         <p>Bonus booster 24lv</p>
 
         <div className="mt-4">

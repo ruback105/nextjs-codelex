@@ -11,6 +11,9 @@ const nextConfig = (phase) => {
       MONGODB_URI: process.env.MONGODB_URI,
       BASE_URL: isDev ? "http://localhost:3000" : process.env.BASE_URL,
     },
+    images: {
+      domains: ["platform-lookaside.fbsbx.com"],
+    },
   };
 
   return common;

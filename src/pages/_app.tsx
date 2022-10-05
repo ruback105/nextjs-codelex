@@ -35,7 +35,9 @@ const Auth = ({ children }) => {
 function MyApp({
   Component,
   pageProps: { session, ...pageProps },
-}: AppProps<{ session: Session }>) {
+}: AppProps<{
+  session: Session & { provider?: "credentials" | "google" | "facebook" };
+}>) {
   const { layout } = Component as NextCustomPage;
 
   const ComponentLayout = getLayout(layout);

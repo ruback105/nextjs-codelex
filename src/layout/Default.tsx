@@ -12,7 +12,8 @@ import {
   SearchIcon,
 } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 
 type Props = {
   children: ReactNode;
@@ -20,6 +21,7 @@ type Props = {
 
 const DefaultLayout: FC<Props> = ({ children }) => {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const routes = [
     {
@@ -39,8 +41,12 @@ const DefaultLayout: FC<Props> = ({ children }) => {
     },
   ];
 
-  function logout() {
-    return null;
+  function getProfileIcon(children: ReactNode) {
+    if (session?.provider === "credentials") {
+      return <Link href="/profile">{children}</Link>;
+    }
+
+    return children;
   }
 
   return (
@@ -53,14 +59,25 @@ const DefaultLayout: FC<Props> = ({ children }) => {
         </div>
         <Button primary>Start Quiz</Button>
 
-        <button
-          type="button"
-          onClick={logout}
-          className="flex space-x-[15px] items-center"
-        >
-          <UserIcon />
-          <p className="truncate">Lorem, ipsum.</p>
-        </button>
+        {getProfileIcon(
+          <div
+            className={classNames("flex space-x-[15px] items-center", {
+              "cursor-pointer": session?.provider === "credentials",
+            })}
+          >
+            {session?.user?.image ? (
+              <Image
+                src={session?.user?.image}
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+            ) : (
+              <UserIcon />
+            )}
+            <p className="truncate">{session?.user?.name || "No User Name"}</p>
+          </div>
+        )}
       </header>
       <div className="flex h-full w-full">
         <div className="flex flex-col w-[330px] h-full">

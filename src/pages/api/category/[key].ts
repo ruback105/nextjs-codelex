@@ -5,4 +5,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { method, query } = req;
+
+  res.status(200).json({});
 }
