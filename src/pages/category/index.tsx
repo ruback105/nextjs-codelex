@@ -43,7 +43,7 @@ const Categories: NextCustomPage<Props> = ({ categories }) => {
 
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5 pt-10">
         {categories.map(({ key, title }) => (
-          <CategoryCard href={key} title={title} key={key} />
+          <CategoryCard href={`/category/${key}`} title={title} key={key} />
         ))}
       </div>
     </div>

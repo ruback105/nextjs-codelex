@@ -30,8 +30,8 @@ const DefaultLayout: FC<Props> = ({ children }) => {
       icon: <AcademicCapIcon width={20} height={20} />,
     },
     {
-      title: "Support",
-      href: "/support",
+      title: "Categories",
+      href: "/category",
       icon: <QuestionMarkCircleIcon width={20} height={20} />,
     },
     {
@@ -50,7 +50,7 @@ const DefaultLayout: FC<Props> = ({ children }) => {
   }
 
   return (
-    <div className="p-[30px] bg-[#E5E5E5] h-screen flex flex-col">
+    <div className="p-[30px] bg-[#E5E5E5] h-screen flex flex-col overflow-hidden">
       <header className="flex justify-between items-center pb-8">
         <h1 className="whitespace-nowrap font-bold text-xl ml-4">Quiz Time</h1>
         <div className="p-[18px] flex space-x-[15px] bg-white border-2 shadow-sm rounded-full overflow-hidden min-w-[250px]">
@@ -113,7 +113,7 @@ const DefaultLayout: FC<Props> = ({ children }) => {
           </button>
         </div>
 
-        <div className="w-full ml-[30px] p-[33px] pt-[50px] shadow-inner rounded-[30px] bg-white overflow-hidden">
+        <div className="w-full ml-[30px] p-[33px] shadow-inner rounded-[30px] bg-white max-h-[80vh] h-full overflow-scroll">
           {children}
         </div>
       </div>
