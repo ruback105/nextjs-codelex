@@ -111,13 +111,10 @@ const Dashboard: NextCustomPage<Props> = ({ categories }) => {
           </div>
 
           <div
-            className={classNames(
-              "mt-2 rounded-[30px] overflow-hidden w-full",
-              {
-                "grid grid-cols-2 gap-5": categories.length,
-                "flex items-center justify-center": !categories.length,
-              }
-            )}
+            className={classNames("mt-2 rounded-[30px] w-full", {
+              "grid grid-cols-2 gap-5": categories.length,
+              "flex items-center justify-center": !categories.length,
+            })}
           >
             {categories.length ? (
               categories.map(({ key, title }) => (
