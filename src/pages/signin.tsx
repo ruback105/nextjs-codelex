@@ -33,8 +33,8 @@ const SignIn: NextCustomPage = () => {
   }
 
   return (
-    <section className="h-screen flex justify-center">
-      <div className="h-full">
+    <section className="h-screen w-screen flex justify-center">
+      <div className="h-full w-full">
         <div className="flex justify-center items-center h-full g-6 text-gray-800">
           <div className="w-screen md:w-5/12 mb-12 md:mb-0 h-screen absolute inset-0 md:relative flex-grow">
             <Image
