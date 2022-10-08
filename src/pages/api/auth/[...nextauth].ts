@@ -1,3 +1,4 @@
+import config from "@/config";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import FacebookProvider from "next-auth/providers/facebook";
@@ -6,7 +7,7 @@ import { ResponseProps } from "../user/[email]";
 const bcrypt = require("bcryptjs");
 
 export const authOptions: NextAuthOptions = {
-  secret: "123123",
+  secret: config.nextAuthSecret,
   providers: [
     CredentialsProvider({
       credentials: {
@@ -17,7 +18,7 @@ export const authOptions: NextAuthOptions = {
         const { password, email } = credentials;
 
         const { user }: ResponseProps = await fetch(
-          `http://localhost:3000/api/user/${email}`
+          `${config.baseUrl}/api/user/${email}`
         ).then((res) => res.json());
 
         if (!user?.hash) {
@@ -34,8 +35,8 @@ export const authOptions: NextAuthOptions = {
       },
     }),
     FacebookProvider({
-      clientId: "1446185392524918",
-      clientSecret: "656b0556c7f01a30298609467a478e1a",
+      clientId: config.facebookClientId,
+      clientSecret: config.facebookClientSecret,
     }),
   ],
   callbacks: {

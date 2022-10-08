@@ -10,6 +10,10 @@ const nextConfig = (phase) => {
     env: {
       MONGODB_URI: process.env.MONGODB_URI,
       BASE_URL: isDev ? "http://localhost:3000" : process.env.BASE_URL,
+      FACEBOOK_CLIENT_ID: process.env.FACEBOOK_CLIENT_ID,
+      FACEBOOK_CLIENT_SECRET: process.env.FACEBOOK_CLIENT_SECRET,
+      NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+      NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     },
     images: {
       domains: ["platform-lookaside.fbsbx.com"],
