@@ -112,7 +112,7 @@ const Dashboard: NextCustomPage<Props> = ({ categories }) => {
 
           <div
             className={classNames(
-              "mt-2 rounded-[30px] overflow-hidden w-full h-full",
+              "mt-2 rounded-[30px] overflow-hidden w-full",
               {
                 "grid grid-cols-2 gap-5": categories.length,
                 "flex items-center justify-center": !categories.length,

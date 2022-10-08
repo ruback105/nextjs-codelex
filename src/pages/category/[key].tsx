@@ -13,53 +13,38 @@ export type Props = {
 const Category: NextCustomPage<Props> = ({ categoryKey, topics }) => {
   const { register, handleSubmit } = useForm<TopicProps>({
     defaultValues: {
-      title: "World War I",
+      title: "World War II",
       description:
-        "Involving all the world’s superpowers, World War I resulted in more than 35 million casualties. In what strange way did the French get troops to the front line? What animals carried messages during the war? Test your knowledge of World War I with this quiz.",
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, inventore nobis. Dolorum enim voluptates assumenda obcaecati, dolore incidunt quaerat id?",
       category_key: "history",
       date: new Date(),
-      points: 40,
-      time_limit: "30 min",
-      attempts: 1,
+      points: 100,
+      time_limit: "40 min",
+      attempts: 3,
       questions: [
         {
           question_description:
-            "On the event that sparked World War I, The New York Times headline for June 29, 1914, was “HEIR TO AUSTRIA'S THRONE IS” what?",
-          answers: ["IMPRISONED", "SLAIN", "CROWNED", "STEPPING DOWN"],
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, inventore nobis. Dolorum",
+          answers: ["Lorem ipsum", "Lorem ipsum", "Lorem ipsum", "Lorem ipsum"],
           correct_answer: 1,
         },
         {
           question_description:
-            "What caused Great Britain to join World War I?",
-          answers: [
-            "German troops marching through Belgium",
-            "Germans sinking British civilian ships",
-            "German bombing raids on London",
-            "German use of illegal chemical weapons",
-          ],
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, inventore nobis. Dolorum",
+          answers: ["Lorem ipsum", "Lorem ipsum", "Lorem ipsum", "Lorem ipsum"],
+          correct_answer: 2,
+        },
+        {
+          question_description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, inventore nobis. Dolorum",
+          answers: ["Lorem ipsum", "Lorem ipsum", "Lorem ipsum", "Lorem ipsum"],
+          correct_answer: 3,
+        },
+        {
+          question_description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, inventore nobis. Dolorum",
+          answers: ["Lorem ipsum", "Lorem ipsum", "Lorem ipsum", "Lorem ipsum"],
           correct_answer: 0,
-        },
-        {
-          question_description:
-            "What novel way were French troops transported to the First Battle of the Marne, just 30 miles from Paris?",
-          answers: [
-            "dogsleds",
-            "horse-drawn carriages",
-            "taxicabs",
-            "bicycles",
-          ],
-          correct_answer: 2,
-        },
-        {
-          question_description:
-            "How were aircraft primarily used at the beginning of World War I?",
-          answers: [
-            "making bomb runs",
-            "transporting paratroopers",
-            "locating targets for artillery",
-            "making supply drops",
-          ],
-          correct_answer: 2,
         },
       ],
     },
@@ -131,10 +116,10 @@ const Category: NextCustomPage<Props> = ({ categoryKey, topics }) => {
       <h2 className="text-3xl font-bold">Select Topic</h2>
 
       <h5 className="text-xl pt-2 font-semibold">
-        Featured Category: {categoryKey}
+        Featured Category: <span className="capitalize">{categoryKey}</span>
       </h5>
 
-      <div className="grid mt-[25px] grid-cols-2 md:grid-cols-3 xl:grid-cols-4 h-full">
+      <div className="grid mt-[25px] grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-[30px] overflow-y-scroll">
         {topics.length ? (
           topics.map(({ _id, title }) => (
             <CategoryCard title={title} href={`/topics/${_id}`} key={_id} />
