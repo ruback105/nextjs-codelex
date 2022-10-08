@@ -41,7 +41,7 @@ const Categories: NextCustomPage<Props> = ({ categories }) => {
         </fieldset>
       </form>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5 pt-10 h-full">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5 pt-10">
         {categories.map(({ key, title }) => (
           <CategoryCard href={key} title={title} key={key} />
         ))}

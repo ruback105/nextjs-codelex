@@ -11,7 +11,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ title, href }) => {
     <Link href={href}>
       <a
         type="button"
-        className="bg-gray-300 rounded-[30px] flex items-end m-h-[160px]"
+        className="bg-gray-300 rounded-[30px] flex items-end min-h-[160px]"
       >
         <p className="p-4">{title}</p>
       </a>
