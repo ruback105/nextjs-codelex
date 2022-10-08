@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import config from "@/config";
+import Image from "next/image";
 
 type FormProps = {
   email: string;
@@ -36,17 +37,18 @@ const SignUp: NextCustomPage = () => {
   }
 
   return (
-    <section className="h-screen">
-      <div className="container px-6 py-12 h-full">
-        <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
-          <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
-            <img
-              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-              className="w-full"
-              alt="Phone image"
+    <section className="h-screen flex justify-center">
+      <div className="h-full">
+        <div className="flex justify-center items-center h-full g-6 text-gray-800">
+          <div className="w-screen md:w-5/12 mb-12 md:mb-0 h-screen absolute inset-0 md:relative flex-grow">
+            <Image
+              src="/login.png"
+              className="w-full object-cover h-screen blur-sm"
+              layout="fill"
+              alt="Login image"
             />
           </div>
-          <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
+          <div className="z-50 w-7/12 md:w-7/12 lg:w-5/12 bg-gray-300 md:bg-transparent rounded-md p-6 md:p-0 md:mx-5">
             <form onSubmit={handleSubmit(onSubmit)} className="mb-5">
               <div className="mb-6">
                 <input

@@ -4,6 +4,7 @@ export type UserProps = {
   _id?: string;
   email: string;
   hash: string;
+  name?: string;
 };
 
 const UserSchema = new Schema<UserProps>({
@@ -14,6 +15,10 @@ const UserSchema = new Schema<UserProps>({
   hash: {
     type: String,
     required: [true, "No hash provided"],
+  },
+  name: {
+    type: String,
+    required: false,
   },
 });
 

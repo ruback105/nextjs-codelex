@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions = {
         const isEqual = bcrypt.compareSync(password, user.hash);
 
         if (isEqual) {
-          return { email: user.email, provider: "credentials" };
+          return { ...user, provider: "credentials" };
         }
 
         return null;
