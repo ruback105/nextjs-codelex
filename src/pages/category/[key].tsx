@@ -1,9 +1,14 @@
 import config from "@/config";
-import { TopicProps } from "@/models/Topic";
+import Topic, { TopicProps } from "@/models/Topic";
 import { NextCustomPage } from "@/types/generic";
-import { GetServerSidePropsContext } from "next";
+import {
+  GetServerSidePropsContext,
+  GetStaticProps,
+  GetStaticPropsContext,
+} from "next";
 import { CategoryCard } from "@/components";
 import { useForm } from "react-hook-form";
+import dbConnect from "@/lib/dbConnect";
 
 export type Props = {
   categoryKey: string;
@@ -134,20 +139,28 @@ const Category: NextCustomPage<Props> = ({ categoryKey, topics }) => {
 
 Category.layout = "default";
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
-  const { query } = context;
+export async function getStaticPaths() {
+  return {
+    paths: ["/category/history"],
+    fallback: false,
+  };
+}
 
-  const { topics } = await fetch(
-    `${config.baseUrl}/api/topic/${query.key}`
-  ).then((res) => res.json());
+export const getStaticProps: GetStaticProps = async (
+  context: GetStaticPropsContext
+) => {
+  await dbConnect();
+
+  const { params } = context;
+
+  const topics = await Topic.find({ category_key: params.key });
 
   return {
     props: {
-      categoryKey: query.key,
-      topics,
+      categoryKey: params.key,
+      topics: JSON.parse(JSON.stringify(topics)),
     },
+    revalidate: 15,
   };
 };
 
