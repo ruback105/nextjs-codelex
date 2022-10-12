@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button default Button snapshot 1`] = `
+<div>
+  <button
+    class="whitespace-nowrap p-4 rounded-full min-w-[200px] font-semibold gap-x-3 items-center flex justify-center"
+    data-testid="button"
+  >
+    Click
+  </button>
+</div>
+`;

@@ -28,6 +28,7 @@ const Button: React.FC<ButtonProps> = ({
         "gap-x-3 items-center flex justify-center"
       )}
       {...rest}
+      data-testid="button"
     >
       {icon}
       {children}
