@@ -7,10 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "test:e2e": "playwright test",
+    "test:e2e-headed": "PWDEBUG=1 playwright test"
   },
   "dependencies": {
     "@heroicons/react": "v1",
+    "@next/bundle-analyzer": "^12.3.1",
     "@testing-library/react-hooks": "^8.0.1",
     "autoprefixer": "^10.4.12",
     "bcryptjs": "^2.4.3",
@@ -25,6 +28,7 @@
     "tailwindcss": "^3.1.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.27.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@types/bcryptjs": "^2.4.2",
